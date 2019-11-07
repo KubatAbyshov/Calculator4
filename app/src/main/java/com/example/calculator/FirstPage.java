@@ -25,6 +25,7 @@ public class FirstPage extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MainAdapter adapter;
     private String resultNum;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,25 +60,22 @@ public class FirstPage extends AppCompatActivity {
         Vibrate();
         if (resultNum != null) {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                //*String title = ((TextView) Objects.requireNonNull(recyclerView.findViewHolderForAdapterPosition()).itemView.findViewById(R.id.vh_text_view)).getText().toString();
-//                String ti = adapter.data.get();*//*
-                        Intent shareIntent = new Intent();
-                        shareIntent.setAction(Intent.ACTION_SEND);
-                       String text=String.valueOf(shareIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,adapter.data));
-                       shareIntent.putExtra(Intent.EXTRA_TEXT,resultNum);
-                        shareIntent.setType("text/plain");
 
-                        if (shareIntent.resolveActivity(getPackageManager()) != null) {
-                            startActivity(shareIntent);
-
-                        }
-
-                    }
-
-            } else {
-                Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, adapter.data.toString());
+                shareIntent.setType("text/plain");
+                if (shareIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(shareIntent);
+                }
             }
+
+
+        } else {
+            Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
         }
+
+    }
 
 
     @Override
