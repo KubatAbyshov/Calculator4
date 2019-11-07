@@ -84,13 +84,24 @@
 
                 <Button
                     android:id="@+id/back"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="back"
                     android:textStyle="bold"
                     android:textSize="30sp"
-                    android:background="#F44336"
+                    android:background="#FF9800"
                     android:onClick="onFirstPage"
+                    app:layout_constraintTop_toBottomOf="@id/result"
+                    android:layout_marginLeft="3dp"/>
+
+                <Button
+                    android:id="@+id/btn_addInRecycler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:text="✔"
+                    android:background="#F44336"
                     app:layout_constraintTop_toBottomOf="@id/result"
                     android:layout_marginLeft="3dp"/>
 

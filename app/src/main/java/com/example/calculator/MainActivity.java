@@ -1,10 +1,14 @@
 package com.example.calculator;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     TextView numberField;
     Double operand = null;
     String lastOperation = "=";
-    Button clear;
+    Button clear, send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +26,26 @@ public class MainActivity extends AppCompatActivity {
 
         resultField = (TextView) findViewById(R.id.resultField);
         numberField = (TextView) findViewById(R.id.numberField);
-        clear = findViewById(R.id.clean);
+        clear = (Button) findViewById(R.id.clean);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Vibrate();
                 numberField.setText("");
+            }
+        });
+        addInRecycler();
+    }
+
+    private void addInRecycler() {
+        send = findViewById(R.id.btn_addInRecycler);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("key", resultField.getText().toString());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
@@ -45,10 +64,21 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         lastOperation = savedInstanceState.getString("OPERATION");
         operand = savedInstanceState.getDouble("OPERAND");
-        resultField.setText(operand.toString());
+        resultField.setText(operand + " " + lastOperation);
+    }
+
+    public void Vibrate() {
+        Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+
+            v.vibrate(50);
+        }
     }
 
     public void onNumberClick(View view) {
+        Vibrate();
         Button button = (Button) view;
         numberField.append(button.getText());
 
@@ -58,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onOperationClick(View view) {
+        Vibrate();
         Button button = (Button) view;
         String op = button.getText().toString();
         String number = numberField.getText().toString();
@@ -115,9 +146,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFirstPage(View v) {
+        Vibrate();
         Intent intent = new Intent(this, FirstPage.class);
-        intent.putExtra("result", resultField.getText().toString());
         startActivity(intent);
+        overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
     }
 
 

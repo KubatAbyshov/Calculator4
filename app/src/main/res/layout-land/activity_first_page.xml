@@ -7,8 +7,8 @@
     tools:context=".FirstPage">
 
 
-    <TextView
-        android:id="@+id/viewResult"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="400dp"
         android:layout_height="80dp"
         android:gravity="center"

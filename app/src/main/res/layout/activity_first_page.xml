@@ -7,18 +7,20 @@
     tools:context=".FirstPage">
 
 
-    <TextView
-        android:id="@+id/viewResult"
-        android:layout_width="400dp"
-        android:layout_height="80dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
         android:gravity="center"
         android:textSize="60sp"
         android:background="@drawable/stroke"
-        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="150dp"/>
+        app:layout_constraintBottom_toTopOf="@id/calculator"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:id="@+id/calculator"
@@ -29,6 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/share"
+        android:layout_marginTop="220dp"
         android:layout_marginLeft="70dp"
         android:gravity="center"
         android:text="Calculator"
@@ -43,6 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/calculator"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="220dp"
         android:layout_marginRight="70dp"
         android:gravity="center"
         android:text="Share Result"
