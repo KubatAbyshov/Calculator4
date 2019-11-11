@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString("OPERATION", lastOperation);
+        outState.putString("KEY",numberField.getText().toString());
+        outState.putString("key",numberField.getText().toString());
 
         if (operand != null)
             outState.putDouble("OPERAND", operand);
@@ -64,7 +67,11 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         lastOperation = savedInstanceState.getString("OPERATION");
         operand = savedInstanceState.getDouble("OPERAND");
-        resultField.setText(operand + " " + lastOperation);
+        resultField.setText(operand.toString());
+        String text=savedInstanceState.getString("KEY");
+        String text1=savedInstanceState.getString("key");
+        numberField.setText(text);
+        numberField.setText(text1);
     }
 
     public void Vibrate() {
@@ -141,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-        resultField.setText(operand.toString().replace('.', ','));
+        resultField.setText(operand.toString().replace(',', '.'));
         numberField.setText("");
     }
 

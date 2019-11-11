@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,11 +12,11 @@ import android.os.VibrationEffect;
 import android.util.Log;
 import android.view.View;
 import android.os.Vibrator;
-import android.widget.Adapter;
-import android.widget.Button;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class FirstPage extends AppCompatActivity {
@@ -36,9 +35,7 @@ public class FirstPage extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
-
     }
-
 
     public void Vibrate() {
         Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
@@ -48,6 +45,17 @@ public class FirstPage extends AppCompatActivity {
             v.vibrate(50);
         }
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
 
     public void onOpenActivity(View view) {
         Vibrate();
@@ -69,14 +77,10 @@ public class FirstPage extends AppCompatActivity {
                     startActivity(shareIntent);
                 }
             }
-
-
         } else {
             Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
         }
-
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
